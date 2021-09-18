@@ -60,6 +60,11 @@ namespace WaypointManager
         public static bool hudHeading = false;
         public static bool hudAngle = false;
 
+        // Adds control of HUD position
+        public static bool  hudPositionOverride = false;
+        public static float hudPositionX = 55.0f + Screen.width / 2f;
+        public static float hudPositionY = 89.0f;
+
         public static float opacity = 1.0f;
 
         public static float scaling = 1.0f;
@@ -87,6 +92,12 @@ namespace WaypointManager
             configNode.AddValue("hudTime", hudTime);
             configNode.AddValue("hudHeading", hudHeading);
             configNode.AddValue("hudAngle", hudAngle);
+
+            // Adds control of HUD position
+            configNode.AddValue("hudPositionOverride", hudPositionOverride);
+            configNode.AddValue("hudPositionX", hudPositionX);
+            configNode.AddValue("hudPositionY", hudPositionY);
+
             configNode.AddValue("displayDecimal", displayDecimal);
             configNode.AddValue("opacity", opacity);
             configNode.AddValue("scaling", scaling);
@@ -126,6 +137,12 @@ namespace WaypointManager
             hudTime = Convert.ToBoolean(configNode.GetValue("hudTime"));
             hudHeading = Convert.ToBoolean(configNode.GetValue("hudHeading"));
             hudAngle = configNode.HasValue("hudAngle") ? Convert.ToBoolean(configNode.GetValue("hudAngle")) : false;
+
+            // Adds control of HUD position
+            hudPositionOverride = Convert.ToBoolean(configNode.GetValue("hudPositionOverride"));
+            hudPositionX = configNode.HasValue("hudPositionX") ? (float)Convert.ToDouble(configNode.GetValue("hudPositionX")) : 55.0f + Screen.width / 2f;
+            hudPositionY = configNode.HasValue("hudPositionY") ? (float)Convert.ToDouble(configNode.GetValue("hudPositionY")) : 89.0f;
+
             opacity = configNode.HasValue("opacity") ? (float)Convert.ToDouble(configNode.GetValue("opacity")) : 1.0f;
             displayDecimal = configNode.HasValue("displayDecimal") ? Convert.ToBoolean(configNode.GetValue("displayDecimal")) : false;
 

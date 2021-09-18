@@ -601,6 +601,27 @@ namespace WaypointManager
                 Config.hudAngle = !Config.hudAngle;
             }
 
+            // Adds control of HUD position
+            GUILayout.Label("HUD Position Override", headingStyle);
+            if (GUILayout.Toggle(Config.hudPositionOverride, "Enable Override") != Config.hudPositionOverride)
+            {
+                Config.hudPositionOverride = !Config.hudPositionOverride;
+            }
+            GUILayout.Label("HUD Horizontal Position (" + (Config.hudPositionX).ToString("F1") + ")", headingStyle);
+            GUILayout.BeginHorizontal();
+            Config.hudPositionX = GUILayout.HorizontalSlider(Config.hudPositionX, 0f, (float)Screen.width);
+            GUILayout.Space(5);
+            if (GUILayout.Button("Reset", GUILayout.Width(50)))
+                Config.hudPositionX = 55.0f + Screen.width / 2f;
+            GUILayout.EndHorizontal();
+            GUILayout.Label("HUD Vertical Position (" + (Config.hudPositionY).ToString("F1") + ")", headingStyle);
+            GUILayout.BeginHorizontal();
+            Config.hudPositionY = GUILayout.HorizontalSlider(Config.hudPositionY, 0f, (float)Screen.height);
+            GUILayout.Space(5);
+            if (GUILayout.Button("Reset", GUILayout.Width(50)))
+                Config.hudPositionY = 89.0f;
+            GUILayout.EndHorizontal();
+
             // Display style
             GUILayout.Label("Location display style", headingStyle);
             if (GUILayout.Toggle(!Config.displayDecimal, "Degrees/Minutes/Seconds") == Config.displayDecimal)

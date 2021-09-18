@@ -226,18 +226,34 @@ namespace WaypointManager
                     // Draw the distance to waypoint text
                     if (Event.current.type == EventType.Repaint)
                     {
-                        if (asb == null)
+                        // Adds control of HUD position if override is on, otherwise get the position based on the altimeter
+                        float ybase;
+                            
+                        if (Config.hudPositionOverride)
                         {
-                            asb = UnityEngine.Object.FindObjectOfType<AltimeterSliderButtons>();
-                            asbRectTransform = asb.GetComponent<RectTransform>();
-                        }
+                            ybase = Config.hudPositionY;
 
-                        float ybase = halfScreenHeight - asbRectTransform.position.y + asbRectTransform.sizeDelta.y * 0.5f + 4;
-                        if (ybase < 0)
+                            leftBoxLeft = Config.hudPositionX - Screen.width / 2f;
+                            rightBoxLeft = Config.hudPositionX + 5f;
+
+                        }
+                        else
                         {
-                            ybase = 0;
-                        }
+                            leftBoxLeft = 55.0f;
+                            rightBoxLeft = Screen.width / 2f + 60f;
 
+                            if (asb == null)
+                            {
+                                asb = UnityEngine.Object.FindObjectOfType<AltimeterSliderButtons>();
+                                asbRectTransform = asb.GetComponent<RectTransform>();
+                            }
+
+                            ybase = halfScreenHeight - asbRectTransform.position.y + asbRectTransform.sizeDelta.y * 0.5f + 4;
+                            if (ybase < 0)
+                            {
+                                ybase = 0;
+                            }
+                        }
 
                         string timeToWP = GetTimeToWaypoint(wpd);
                         if (Config.hudDistance)
